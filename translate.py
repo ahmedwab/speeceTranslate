@@ -12,6 +12,7 @@ def speechtranslate():
     textBox.insert(1.0, translatedText)
     speechbutton.config(text="Translate") 
 def texttranslate():
+    
     input = textBox.get("1.0",END)
     lang = langVariable.get()
     result=st.translate(input,lang)
@@ -20,6 +21,7 @@ def texttranslate():
 
 
 def listen():
+    textBox.delete('1.0', END)
     speechbutton.config(text="Listening...") 
     thread = threading.Thread(target=speechtranslate)
     thread.start()
