@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import languages
 import threading
+import pathlib
 import speechTranslate as st
 
 
@@ -33,8 +34,10 @@ def change(event):
     textBox.insert(1.0, result)
     
     
-
+path = pathlib.Path(__file__).parent.absolute()
+filename= str(path) + '/images/image.png'
 window = Tk()
+window.iconphoto(False, PhotoImage(file=filename))
 window.title("Speech Translate")
 window.geometry('400x300')
 window.configure(background = "#161d25")
