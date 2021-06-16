@@ -2,7 +2,7 @@
 
 The `speechTranslate` application Python application that  a user's speech and translates it to different languages using the Google Translate API.
 
-<img src="images/screenshotapp.png" alt="Menu">
+<img src="images/image.png" alt="icon">
 
 ## Installing the Application
 Access your your desired folder
@@ -43,6 +43,7 @@ Then, you can run it using the following command
 python3 translate.py
 ```
 ## Using the application
+<img src="images/screenshotapp.png" alt="Menu">
 
 The translate application can retrieve two inputs and here's how to use them
 
