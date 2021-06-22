@@ -9,10 +9,13 @@ import textToSpeech as tts
 
 # Translates input audio into English
 def speechtranslate():
-    targetLang = langVariable.get()
-    translatedText = st.recordAudio(targetLang)
-    textBox.insert(1.0, translatedText)
-    translatebutton.config(text="Translate") 
+    try:
+        targetLang = langVariable.get()
+        translatedText = st.recordAudio(targetLang)
+        textBox.insert(1.0, translatedText)
+        translatebutton.config(text="Translate") 
+    except:
+         translatebutton.config(text="Translate") 
 
 # Translates text into desired language
 def texttranslate():
