@@ -23,6 +23,7 @@ For Mac Users, you will have to do the following
 ```sh
 	brew update
 	brew install portaudio
+	brew install mpg321
 	pip3 install pyaudio
 
 ```
@@ -62,6 +63,8 @@ Select desired translation
 Input text in text input box
 
 Click on Translate
+
+Moreover, you can play audio if there is a supported language available by selecting Play Audio
     
 
 

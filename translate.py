@@ -4,14 +4,17 @@ import languages
 import threading
 import pathlib
 import speechTranslate as st
+import textToSpeech as tts
 
 
-
+# Translates input audio into English
 def speechtranslate():
     targetLang = langVariable.get()
     translatedText = st.recordAudio(targetLang)
     textBox.insert(1.0, translatedText)
-    speechbutton.config(text="Translate") 
+    translatebutton.config(text="Translate") 
+
+# Translates text into desired language
 def texttranslate():
     
     input = textBox.get("1.0",END)
@@ -20,26 +23,42 @@ def texttranslate():
     textBox.delete('1.0', END)
     textBox.insert(1.0, result)
 
-
+# Calls the speechtranslate while threading
 def listen():
     textBox.delete('1.0', END)
-    speechbutton.config(text="Listening...") 
+    translatebutton.config(text="Listening...") 
     thread = threading.Thread(target=speechtranslate)
     thread.start()
+# Changes text to speech
+def speak():
+   
+    language = langVariable.get()
+    text = textBox.get("1.0",END)
+    if len(text) == 1:
+        text = st.translate("No text available",language)
+    print(type(text))
+    tts.playAudio(language,text)
+
+# Calls translate function upon language change
 def change(event):
     input = textBox.get("1.0",END)
     lang = langVariable.get()
     result=st.translate(input,lang)
     textBox.delete('1.0', END)
     textBox.insert(1.0, result)
+
     
-    
+#path of current file 
 path = pathlib.Path(__file__).parent.absolute()
+
+#App icon image 
 filename= str(path) + '/images/image.png'
+
+#Window components
 window = Tk()
 window.iconphoto(False, PhotoImage(file=filename))
 window.title("Speech Translate")
-window.geometry('400x300')
+window.geometry('400x400')
 window.configure(background = "#161d25")
 window.resizable(False, False)
 
@@ -72,13 +91,20 @@ textBox.config(font=("Courier", 15),height = 12,width = 40)
 
 
 #Speech Translate Button
-speechbutton = Button(frame, text="Speech Translate", command=listen)
-speechbutton.place(x=120, y=275, anchor="center")
-speechbutton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 20)
+iconFile = str(path) + '/images/icon.png'
+photo = PhotoImage(file = iconFile)
+speechbutton = Button(frame, text="Speech Translate", image = photo , command=listen)
+speechbutton.place(x=200, y=290, anchor="center")
+speechbutton.config(fg = "#161d25",font=("Courier", 15),height = 50, width = 50)
 
 #Text Translate Button
-button = Button(frame, text="Translate", command=texttranslate)
-button.place(x=290, y=275, anchor="center")
-button.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 16)
+translatebutton = Button(frame, text="Translate", command=texttranslate)
+translatebutton.place(x=120, y=350, anchor="center")
+translatebutton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 16)
+
+#Play Audio Button
+Audiobutton = Button(frame, text="Play Audio", command=speak)
+Audiobutton.place(x=280, y=350, anchor="center")
+Audiobutton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 16)
 
 window.mainloop()

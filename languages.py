@@ -108,6 +108,14 @@ LANGUAGES = {
     'zu': 'zulu'
 }
 
+# Returns dictionary 
 def getLanguages():
     return list(LANGUAGES.values())
+
+# Returns key 
+def get_key(val):
+    for key, value in LANGUAGES.items():
+         if val == value:
+             return key
+        
 
