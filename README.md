@@ -44,7 +44,7 @@ Then, you can run it using the following command
 python3 translate.py
 ```
 ## Using the application
-<img src="images/screenshotapp.png" alt="Menu">
+<img src="images/screenshotApp.png" alt="Menu">
 
 The translate application can retrieve two inputs and here's how to use them
 
