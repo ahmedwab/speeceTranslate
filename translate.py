@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import filedialog
 import languages
 import threading
 import pathlib
 import speechTranslate as st
 import textToSpeech as tts
+import imageInterpreter as ii
 
 
 # Translates input audio into English
@@ -50,6 +52,17 @@ def change(event):
     textBox.delete('1.0', END)
     textBox.insert(1.0, result)
 
+# upload image fuction
+def UploadAction(event=None):
+    filename = filedialog.askopenfilename()
+    print('Selected:', filename)
+    result = ii.getTextFromImage(filename)
+    lang = langVariable.get()
+    result=st.translate(result,lang)
+    textBox.delete('1.0', END)
+    textBox.insert(1.0, result)
+    
+
     
 #path of current file 
 path = pathlib.Path(__file__).parent.absolute()
@@ -61,12 +74,12 @@ filename= str(path) + '/images/image.png'
 window = Tk()
 window.iconphoto(False, PhotoImage(file=filename))
 window.title("Speech Translate")
-window.geometry('400x400')
+window.geometry('400x500')
 window.configure(background = "#161d25")
 window.resizable(False, False)
 
 #Body Frame
-frame = Frame(window,bg = "#161d25",width=400,height=400)
+frame = Frame(window,bg = "#161d25",width=400,height=500)
 frame.grid(row=0,column=0,sticky="NW")
 frame.grid_propagate(0)
 frame.update()
@@ -109,5 +122,11 @@ translatebutton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 1
 Audiobutton = Button(frame, text="Play Audio", command=speak)
 Audiobutton.place(x=280, y=350, anchor="center")
 Audiobutton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 16)
+
+#Upload Image Button
+imageButton = Button(frame, text="Image Upload", command=UploadAction)
+imageButton.place(x=200, y=420, anchor="center")
+imageButton.config(fg = "#161d25",font=("Courier", 15),height = 2, width = 16)
+
 
 window.mainloop()

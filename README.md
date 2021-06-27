@@ -24,6 +24,7 @@ For Mac Users, you will have to do the following
 	brew update
 	brew install portaudio
 	brew install mpg321
+	brew install tesseract
 	pip3 install pyaudio
 
 ```
@@ -63,6 +64,14 @@ Select desired translation
 Input text in text input box
 
 Click on Translate
+
+3. Image Upload
+
+Select desired translation
+
+Upload Image that has text
+
+
 
 Moreover, you can play audio if there is a supported language available by selecting Play Audio
     
